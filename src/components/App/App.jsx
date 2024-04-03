@@ -3,6 +3,8 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import axios from "axios";
 import NotFoundPage from "../../pages/NotFoundPage";
+import HomePage from "../../pages/HomePage/HomePage";
+import MoviesPage from "../../pages/MoviesPage/MoviesPage";
 import SearchBar from "../SearchBar/SearchBar";
 
 function App() {
@@ -24,6 +26,9 @@ function App() {
         };
         const response = await axios.get(url, options);
         console.log(response);
+        const normalizedData = response.data.results.map(
+          ({ poster_path, id, title, overview }) => {}
+        );
       } catch (error) {
         console.log(error);
       }
@@ -36,20 +41,17 @@ function App() {
   };
   return (
     <div>
-      <SearchBar onSubmit={handleSearch} />
-      {/* <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/products">Products</NavLink>
+      <nav>
+        <NavLink to="/">HomePage</NavLink>
+        <NavLink to="/movies">MoviesPage</NavLink>
       </nav>
 
-      // <Routes>
-      //   <Route path="/" element={<Home />} />
-      //   <Route path="/about" element={<About />} />
-      //   <Route path="/products" element={<Products />} />
-      //   <Route path="/products/:productId" element={<ProductDetails />} />
-      //   {/* <Route path="*" element={<NotFound />} /> */}
-      {/* </Routes> */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<MoviesPage />} />
+      </Routes>
+
+      <SearchBar onSubmit={handleSearch} />
     </div>
   );
 }
