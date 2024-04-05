@@ -1,6 +1,8 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Reviews from "./Reviews";
+import Cast from "./Cast";
 
 const API_KEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ODllZTM5MDY5Y2RkNmViYjliOWVkYjEyNGU4ZDRhYSIsInN1YiI6IjY2MGM1ZjcwOWM5N2JkMDE3Y2E1NzlmZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.C5GCyJnD3id-ojK0JfV0Hv6YdftvbhJvPg073sYnsrE";
@@ -44,12 +46,14 @@ const MovieDetailsPage = () => {
           </div>
           <div>
             <p>Additional Information</p>
-            <Link to="/cast">
-              <p>Cast </p>
+
+            <Link to="cast">{<Cast />}</Link>
+            <Link to="reviews">
+              {" "}
+              Reviews
+              {/* {<Reviews movies={movies.overview} />} */}
             </Link>
-            <Link to="/reviews">
-              <p>Reviews {movies.overview}</p>
-            </Link>
+            <Outlet />
           </div>
         </div>
       )}
