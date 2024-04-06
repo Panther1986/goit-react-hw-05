@@ -1,63 +1,63 @@
-import { useParams, Link, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Reviews from "./Reviews";
-import Cast from "./Cast";
-
-const API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ODllZTM5MDY5Y2RkNmViYjliOWVkYjEyNGU4ZDRhYSIsInN1YiI6IjY2MGM1ZjcwOWM5N2JkMDE3Y2E1NzlmZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.C5GCyJnD3id-ojK0JfV0Hv6YdftvbhJvPg073sYnsrE";
+import { useParams, Link, Outlet, useLocation } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { fetchMovieDetails } from "../../components/MovieApi";
+import { MdArrowBack } from "react-icons/md";
 
 const MovieDetailsPage = () => {
   const { moviesId } = useParams();
-  const [movies, setMovie] = useState(null);
-  const [error, setError] = useState(false);
-  useEffect(() => {
-    async function fetchTrendingMovieById() {
-      try {
-        const url = `https://api.themoviedb.org/3/movie/${moviesId}`;
+  const [movies, setMovies] = useState(null);
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from || "/");
 
-        const options = {
-          headers: {
-            Authorization: `Bearer ${API_KEY}`,
-          },
-        };
-        const response = await axios.get(url, options);
-        setMovie(response.data);
-        console.log(response);
-        setError(false);
-      } catch (error) {
-        setError("Ooooops something went wrong, please reload the page 😞");
-      }
-    }
-    fetchTrendingMovieById();
+  useEffect(() => {
+    const detailsMovie = async () => {
+      const details = await fetchMovieDetails(moviesId);
+      setMovies(details);
+    };
+
+    detailsMovie();
   }, [moviesId]);
 
+  console.log(movies);
   return (
     <div>
+      <Link to={backLinkRef.current}>
+        <MdArrowBack />
+        Go back
+      </Link>
       {movies && (
         <div>
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+            alt={movies.title}
+            width="250"
+          />
           <div>
-            <img src={movies.backdrop_path} />
-            <p>
+            <h2>
               {movies.title} ({movies.release_date})
-            </p>
+            </h2>
             <p>Genres {movies.genres.map((genre) => genre.name).join(",")}</p>
-            <p>Overview: {movies.tagline}</p>
+            <p>Overview: {movies.overview}</p>
           </div>
-          <div>
-            <p>Additional Information</p>
+        </div>
+      )}
 
-            <Link to="cast">{<Cast />}</Link>
-            <Link to="reviews">
-              {" "}
-              Reviews
-              {/* {<Reviews movies={movies.overview} />} */}
-            </Link>
-            <Outlet />
-          </div>
+      {movies && (
+        <div>
+          <h3>Additional Information</h3>
+          <ul>
+            <li>
+              <Link to={`/movies/${moviesId}/cast`}>Cast</Link>
+            </li>
+            <li>
+              <Link to={`/movies/${moviesId}/reviews`}> Reviews</Link>
+            </li>
+          </ul>
+          <Outlet />
         </div>
       )}
     </div>
   );
 };
+
 export default MovieDetailsPage;

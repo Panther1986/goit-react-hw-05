@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import NotFoundPage from "../../pages/NotFoundPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import MoviesPage from "../../pages/MoviesPage/MoviesPage";
 import MovieDetailsPage from "../../pages/MovieDetailsPage/MovieDetailsPage";
-import Reviews from "../../pages/MovieDetailsPage/Reviews";
-import Cast from "../../pages/MovieDetailsPage/Cast";
+import Reviews from "../Reviews";
+import Cast from "../Cast";
 
 function App() {
-  const [loadind, setLoading] = useState(false);
-  const [query, setQuery] = useState("");
-  const [movie, setMovie] = useState([]);
-
   // useEffect(() => {
   //   if (query === "") return;
   //   async function fetchArticles() {
@@ -49,14 +44,12 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:moviesId" element={<MovieDetailsPage />}>
+        <Route path="/movies/:moviesId/*" element={<MovieDetailsPage />}>
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
-      {/* <SearchBar onSubmit={handleSearch} /> */}
     </div>
   );
 }
