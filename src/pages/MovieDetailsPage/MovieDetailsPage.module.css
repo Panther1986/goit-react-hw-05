@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+}
+
+.containerMovie {
+  display: flex;
+  margin-top: 40px;
+}
+
+.containerMovieText {
+  padding-left: 10px;
+}
+
+.containerMovieTextGenres {
+  color: rgb(195, 28, 28);
+}

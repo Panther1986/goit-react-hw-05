@@ -47,3 +47,9 @@
 .link {
   color: blueviolet;
 }
+.container {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 500;
+  font-size: medium;
+}

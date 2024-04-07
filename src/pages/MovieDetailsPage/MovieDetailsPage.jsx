@@ -2,6 +2,7 @@ import { useParams, Link, Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { fetchMovieDetails } from "../../components/MovieApi";
 import { MdArrowBack } from "react-icons/md";
+import css from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { moviesId } = useParams();
@@ -20,23 +21,25 @@ const MovieDetailsPage = () => {
 
   console.log(movies);
   return (
-    <div>
+    <div className={css.container}>
       <Link to={backLinkRef.current}>
         <MdArrowBack />
         Go back
       </Link>
       {movies && (
-        <div>
+        <div className={css.containerMovie}>
           <img
             src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
             alt={movies.title}
             width="250"
           />
-          <div>
+          <div className={css.containerMovieText}>
             <h2>
               {movies.title} ({movies.release_date})
             </h2>
-            <p>Genres {movies.genres.map((genre) => genre.name).join(",")}</p>
+            <p className={css.containerMovieTextGenres}>
+              Genres: {movies.genres.map((genre) => genre.name).join(",")}
+            </p>
             <p>Overview: {movies.overview}</p>
           </div>
         </div>

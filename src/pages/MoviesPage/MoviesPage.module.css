@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputMovies {
+  width: 250px;
+  height: 40px;
+  font-size: 25px;
+}
+.btnMovies {
+  height: 40px;
+  color: blueviolet;
+  background-color: rgb(188, 184, 184);
+  margin-left: 10px;
+}
+.btnMovies:hover,
+.btnMovies:focus {
+  background-color: aqua;
+}
