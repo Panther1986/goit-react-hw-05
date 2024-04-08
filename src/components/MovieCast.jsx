@@ -2,7 +2,7 @@ import { fetchMovieCast } from "./MovieApi";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const Cast = () => {
+const MovieCast = () => {
   const { moviesId } = useParams();
   const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,9 +15,7 @@ const Cast = () => {
         setCast(castData);
         setLoading(false);
       } catch (error) {
-        setError(
-          toast.error("Ooooops something went wrong, please reload the page 😞")
-        );
+        setError("Ooooops something went wrong, please reload the page 😞");
         setLoading(false);
       }
     };
@@ -55,4 +53,4 @@ const Cast = () => {
   );
 };
 
-export default Cast;
+export default MovieCast;

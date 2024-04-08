@@ -14,20 +14,14 @@ const MoviesPage = () => {
         const queryParam = searchParams.get("query");
         const results = await searchMovies(queryParam);
         if (results.length === 0) {
-          setError(
-            toast.error(
-              "Ooooops something went wrong, please reload the page 😞"
-            )
-          );
+          setError("Ooooops something went wrong, please reload the page 😞");
           return;
         }
         setMovies(results);
         setError(null);
       } catch (error) {
         console.log(error);
-        setError(
-          toast.error("Ooooops something went wrong, please reload the page 😞")
-        );
+        setError("Ooooops something went wrong, please reload the page 😞");
       }
     };
     if (searchParams.has("query")) {

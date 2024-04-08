@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import NavBar from "../NavBar/NavBar";
-import NotFoundPage from "../../pages/NotFoundPage";
+import Navigations from "../NavBar/Navigations";
 import css from "./App.module.css";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
@@ -9,13 +8,14 @@ const MoviesPage = lazy(() => import("../../pages/MoviesPage/MoviesPage"));
 const MovieDetailsPage = lazy(() =>
   import("../../pages/MovieDetailsPage/MovieDetailsPage")
 );
-const Cast = lazy(() => import("../Cast"));
-const Reviews = lazy(() => import("../Reviews"));
+const Cast = lazy(() => import("../MovieCast"));
+const Reviews = lazy(() => import("../MovieReviews"));
+const NotFoundPage = lazy(() => import("../../pages/NotFoundPage"));
 function App() {
   return (
     <div className={css.container}>
       <Suspense fallback={<div>Loading... 🤔</div>}>
-        <NavBar />
+        <Navigations />
 
         <Routes>
           <Route path="/" element={<HomePage />} />

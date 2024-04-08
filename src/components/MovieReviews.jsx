@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { fetchMovieDataReviews } from "../components/MovieApi";
+import { fetchMovieDataReviews } from "./MovieApi";
 import { useParams } from "react-router-dom";
 
-const Reviews = () => {
+const MovieReviews = () => {
   const { moviesId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,4 +43,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default MovieReviews;
