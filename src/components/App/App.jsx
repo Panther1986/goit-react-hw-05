@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import Navigations from "../NavBar/Navigations";
+import Navigations from "../Navigation/Navigations";
 import css from "./App.module.css";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
@@ -8,8 +8,8 @@ const MoviesPage = lazy(() => import("../../pages/MoviesPage/MoviesPage"));
 const MovieDetailsPage = lazy(() =>
   import("../../pages/MovieDetailsPage/MovieDetailsPage")
 );
-const Cast = lazy(() => import("../MovieCast"));
-const Reviews = lazy(() => import("../MovieReviews"));
+const Cast = lazy(() => import("../MovieCast/MovieCast"));
+const Reviews = lazy(() => import("../MovieReviews/MovieReviews"));
 const NotFoundPage = lazy(() => import("../../pages/NotFoundPage"));
 function App() {
   return (

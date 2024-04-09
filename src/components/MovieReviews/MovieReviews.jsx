@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { fetchMovieDataReviews } from "./MovieApi";
+import { fetchMovieDataReviews } from "../MovieApi/MovieApi";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const MovieReviews = () => {
   const { moviesId } = useParams();

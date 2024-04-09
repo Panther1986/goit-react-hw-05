@@ -1,6 +1,6 @@
 import { useParams, Link, Outlet, useLocation } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
-import { fetchMovieDetails } from "../../components/MovieApi";
+import { useState, useEffect, useRef, Suspense } from "react";
+import { fetchMovieDetails } from "../../components/MovieApi/MovieApi";
 import { MdArrowBack } from "react-icons/md";
 import css from "./MovieDetailsPage.module.css";
 
@@ -56,7 +56,9 @@ const MovieDetailsPage = () => {
               <Link to={`/movies/${moviesId}/reviews`}> Reviews</Link>
             </li>
           </ul>
-          <Outlet />
+          <Suspense fallback={<div>Loading... 🥵</div>}>
+            <Outlet />
+          </Suspense>
         </div>
       )}
     </div>
